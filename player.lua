@@ -31,7 +31,7 @@ function play(src)
     local decoder = dfpwm.make_decoder()
     for input in io.lines(src, 1024) do
         local decoded = decoder(input)
-        while not speaker.playAudio(decoded) do
+        while not speaker.playAudio(decoded,10000) do
             os.pullEvent("speaker_audio_empty")
         end
     end
@@ -65,7 +65,7 @@ while true do
         else
             for i,song in ipairs(songs) do
                 if fs.exists("sounds/"..song..".dfpwm") then
-                    print(i..". "..song.." (downloaded)")
+                    print(i..". "..song.." (local)")
                 else
                     print(i..". "..song)
                 end
